@@ -15,4 +15,4 @@ jobs:
           key: ${{ secrets.KEY }}
           port: 22
           source: "."
-          target: "/var/www/html"
+          target: "/home/ubuntu/var/www/html"
