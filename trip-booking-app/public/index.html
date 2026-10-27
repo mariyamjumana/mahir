@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Trip Booking</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+
+        header { background: linear-gradient(135deg, #1e40af, var(--primary)); color: white; padding: 40px 20px; text-align: center; }
+        header h1 { font-size: 2.5rem; margin-bottom: 8px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+
+        .main-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        section { margin-bottom: 40px; }
+        h2 { font-size: 1.5rem; margin-bottom: 20px; color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+
+        .destination-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .destination-card { background: var(--card-bg); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0,0, 0.05); border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .destination-card:hover { transform: translateY(-3px); }
+        .destination-card h3 { color: var(--primary); margin-bottom: 6px; }
+        .destination-card .location { font-size: 0.85rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
+        .destination-card .price { font-size: 1.2rem; font-weight: bold; color: var(--success); margin-top: 15px; }
+
+        .booking-form-wrapper { background: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+        .form-group.full-width { grid-column: span 2; }
+
+        label { font-weight: 600; font-size: 0.9rem; color: #475569; }
+        input, select { padding: 12px; font-size: 1rem; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; }
+        input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+        button { background: var(--success); color: white; border: none; padding: 14px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
+        button:hover { background: #15803d; }
+
+        #message { margin-top: 15px; padding: 12px; border-radius: 8px; font-weight: 500; text-align: center; display: none; }
+        .success-msg { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; display: block !important; }
+        .error-msg { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; display: block !important; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Wanderlust Travel</h1>
+        <p>Discover breathtaking destinations and book your getaway instantly.</p>
+    </header>
+
+    <div class="main-container">
+        <section>
+            <h2>Featured Destinations</h2>
+            <div id="destinations-list" class="destination-grid">
+                <p>Loading destinations...</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Reserve Your Trip</h2>
+            <div class="booking-form-wrapper">
+                <form id="booking-form">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="destination">Select Destination</label>
+                            <select id="destination" required>
+                                <option value="">-- Choose your dream destination --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required placeholder="Mariyam Jumana BR">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Travel Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <input type="number" id="guests" min="1" value="1" required>
+                        </div>
+                    </div>
+                    <button type="submit">Confirm Booking</button>
+                </form>
+                <div id="message"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        async function loadDestinations() {
+            try {
+                const response = await fetch(`${API_URL}/destinations`);
+                const destinations = await response.json();
+                
+                const listDiv = document.getElementById('destinations-list');
+                const selectDropdown = document.getElementById('destination');
+                listDiv.innerHTML = '';
+                
+                destinations.forEach(dest => {
+                    listDiv.innerHTML += `
+                        <div class="destination-card">
+                            <h3>${dest.title}</h3>
+                            <div class="location">📍 ${dest.location}</div>
+                            <p>${dest.description}</p>
+                            <div class="price">₹${dest.price.toLocaleString('en-IN')} / person</div>
+                        </div>
+                    `;
+                    selectDropdown.innerHTML += `<option value="${dest.id}">${dest.title} - ₹${dest.price.toLocaleString('en-IN')}</option>`;
+                });
+            } catch (error) {
+                document.getElementById('destinations-list').innerHTML = '<p style="color: red;">Failed to load destinations. Make sure the server is running.</p>';
+            }
+        }
+
+        document.getElementById('booking-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msgDiv = document.getElementById('message');
+            msgDiv.className = '';
+            msgDiv.innerText = '';
+
+            const bookingData = {
+                destination_id: document.getElementById('destination').value,
+                user_name: document.getElementById('name').value,
+                user_email: document.getElementById('email').value,
+                travel_date: document.getElementById('date').value,
+                guests: document.getElementById('guests').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/bookings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bookingData)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    msgDiv.className = 'success-msg';
+                    msgDiv.innerText = `Success! Your booking has been confirmed. Booking ID: #${result.bookingId}`;
+                    document.getElementById('booking-form').reset();
+                } else {
+                    msgDiv.className = 'error-msg';
+                    msgDiv.innerText = `Error: ${result.error}`;
+                }
+            } catch (err) {
+                msgDiv.className = 'error-msg';
+                msgDiv.innerText = 'Network error: Could not reach the server.';
+            }
+        });
+
+        loadDestinations();
+    </script>
+</body>
+</html>
