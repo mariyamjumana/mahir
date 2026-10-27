@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velo — Premium Car Rental</title>
+  <meta name="description" content="Modern premium car rental landing page.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="#home"><span class="brand-mark">V</span><span>VELO</span></a>
+    <nav class="nav-links">
+      <a href="#cars">Cars</a>
+      <a href="#why-us">Why Velo</a>
+      <a href="#process">How it works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#cars">Explore cars <span>↗</span></a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> Luxury mobility, made simple</div>
+        <h1>Drive <span>better.</span><br>Go anywhere.</h1>
+        <p>Rent clean, comfortable cars with transparent pricing and a smooth pickup experience. Your next journey starts here.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#cars">Browse cars <span>→</span></a>
+          <a class="text-btn" href="#process">How it works <span>↓</span></a>
+        </div>
+        <div class="trust-row">
+          <div class="avatar-stack">
+            <span>AR</span><span>MK</span><span>NS</span><span>+</span>
+          </div>
+          <div><strong>4.9/5</strong><small>from 1,200+ renters</small></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="glow"></div>
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="floating-card card-top">
+          <span class="mini-icon">✦</span>
+          <div><strong>Premium fleet</strong><small>Always road-ready</small></div>
+        </div>
+        <div class="car-stage">
+          <div class="car-shadow"></div>
+          <div class="car-body">
+            <div class="roof"></div>
+            <div class="window window-a"></div>
+            <div class="window window-b"></div>
+            <div class="hood"></div>
+            <div class="front-light"></div>
+            <div class="grille"></div>
+            <div class="wheel wheel-a"><i></i></div>
+            <div class="wheel wheel-b"><i></i></div>
+          </div>
+        </div>
+        <div class="floating-card card-bottom">
+          <span class="price">₹1,899</span>
+          <span>/ day</span>
+          <small>Best value this week</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-panel" aria-label="Quick booking">
+      <div class="field">
+        <label>Pick-up location</label>
+        <button class="select-btn">Kochi <span>⌄</span></button>
+      </div>
+      <div class="field">
+        <label>Pick-up date</label>
+        <input id="pickupDate" type="date">
+      </div>
+      <div class="field">
+        <label>Return date</label>
+        <input id="returnDate" type="date">
+      </div>
+      <button class="search-btn" id="searchCars">Find a car <span>→</span></button>
+    </section>
+
+    <section class="section" id="cars">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Our fleet</div>
+          <h2>Choose your <span>ride.</span></h2>
+        </div>
+        <p>From efficient city cars to spacious SUVs, pick a vehicle that fits your trip.</p>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter active" data-filter="all">All cars</button>
+        <button class="filter" data-filter="sedan">Sedan</button>
+        <button class="filter" data-filter="suv">SUV</button>
+        <button class="filter" data-filter="luxury">Luxury</button>
+      </div>
+
+      <div class="car-grid">
+        <article class="car-card" data-type="suv">
+          <div class="car-image suv-image">
+            <span class="tag">Popular</span>
+            <div class="illustrated-car dark-car"><div class="i-roof"></div><div class="i-window"></div><div class="i-wheel one"></div><div class="i-wheel two"></div></div>
+          </div>
+          <div class="car-info">
+            <div><h3>Urban X5</h3><span>SUV · Automatic · 5 seats</span></div>
+            <strong>₹2,499<small>/day</small></strong>
+          </div>
+          <button class="rent-btn" data-car="Urban X5">Rent this car <span>→</span></button>
+        </article>
+
+        <article class="car-card" data-type="sedan">
+          <div class="car-image sedan-image">
+            <span class="tag">Best value</span>
+            <div class="illustrated-car blue-car"><div class="i-roof"></div><div class="i-window"></div><div class="i-wheel one"></div><div class="i-wheel two"></div></div>
+          </div>
+          <div class="car-info">
+            <div><h3>Velo S</h3><span>Sedan · Automatic · 5 seats</span></div>
+            <strong>₹1,899<small>/day</small></strong>
+          </div>
+          <button class="rent-btn" data-car="Velo S">Rent this car <span>→</span></button>
+        </article>
+
+        <article class="car-card" data-type="luxury">
+          <div class="car-image luxury-image">
+            <span class="tag">Premium</span>
+            <div class="illustrated-car silver-car"><div class="i-roof"></div><div class="i-window"></div><div class="i-wheel one"></div><div class="i-wheel two"></div></div>
+          </div>
+          <div class="car-info">
+            <div><h3>Aura GT</h3><span>Luxury · Automatic · 4 seats</span></div>
+            <strong>₹4,499<small>/day</small></strong>
+          </div>
+          <button class="rent-btn" data-car="Aura GT">Rent this car <span>→</span></button>
+        </article>
+      </div>
+    </section>
+
+    <section class="why section" id="why-us">
+      <div class="section-heading">
+        <div><div class="eyebrow">Why Velo</div><h2>Less hassle.<br><span>More road.</span></h2></div>
+        <p>Everything you need for a better rental experience, without the complicated bits.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card"><div class="feature-icon">◈</div><h3>Transparent pricing</h3><p>No hidden fees. What you see is what you pay.</p></div>
+        <div class="feature-card featured"><div class="feature-icon">✦</div><h3>Fresh, clean cars</h3><p>Every vehicle is inspected and cleaned before pickup.</p></div>
+        <div class="feature-card"><div class="feature-icon">↗</div><h3>Easy pickup</h3><p>Quick handover, flexible locations, less waiting.</p></div>
+      </div>
+    </section>
+
+    <section class="process section" id="process">
+      <div class="process-copy">
+        <div class="eyebrow">Three simple steps</div>
+        <h2>Book. Pick up.<br><span>Drive.</span></h2>
+        <p>We've designed every step to be simple, so you can spend less time arranging your car and more time enjoying the journey.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><b>01</b><div><h3>Choose your car</h3><p>Find the right vehicle for your route and budget.</p></div></div>
+        <div class="step"><b>02</b><div><h3>Reserve online</h3><p>Pick your dates and confirm in just a few clicks.</p></div></div>
+        <div class="step"><b>03</b><div><h3>Hit the road</h3><p>Collect your keys and enjoy the drive.</p></div></div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+      <div><div class="eyebrow">Ready when you are</div><h2>Your next adventure<br>starts <span>here.</span></h2></div>
+      <a class="primary-btn light" href="#cars">Find your car <span>→</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand"><span class="brand-mark">V</span><span>VELO</span></div>
+    <p>Premium car rentals, made simple.</p>
+    <span>© 2026 Velo Rentals</span>
+  </footer>
+
+  <div class="modal" id="rentModal" aria-hidden="true">
+    <div class="modal-box">
+      <button class="close-modal" aria-label="Close">×</button>
+      <div class="eyebrow">Reservation</div>
+      <h2>Book <span id="selectedCar">your car</span></h2>
+      <p>Choose your dates and we'll prepare your ride.</p>
+      <div class="modal-fields">
+        <label>Pickup <input id="modalPickup" type="date"></label>
+        <label>Return <input id="modalReturn" type="date"></label>
+      </div>
+      <button class="primary-btn" id="confirmBooking">Continue <span>→</span></button>
+      <div class="form-message" id="formMessage"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
